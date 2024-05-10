@@ -19,7 +19,7 @@ def receive_data():
     #create an str as dd-MM-yyyy hh-mm with current time
 
 
-    filename = f"{datetime.now().strftime('%d-%m-%Y %H-%M-%s')}.json"
+    filename = f"{datetime.now().strftime('%d-%m-%Y %H-%M-%S')}.json"
     file_path = os.path.join(FOLDER_PATH, filename)
 
     # Save the data to a JSON file
