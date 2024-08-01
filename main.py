@@ -12,17 +12,19 @@ FOLDER_PATH = 'recebidas'
 if not os.path.exists(FOLDER_PATH):
     os.makedirs(FOLDER_PATH)
 
-@app.route('/api/receive', methods=['POST'])
-def receive_data():
-    # Get the request data
-    data = request.get_json()
-    #create an str as dd-MM-yyyy hh-mm with current time
+@app.route('/', methods=['GET'])
+def hello_world():
+    return jsonify({'message': 'Testing api v 1.0'}), 200
 
+@app.route('/api/receive', methods=['POST'])
+def receive_data():    
+    data = request.get_json()
+    if request.args:
+        data["query_params"] = request.args
 
     filename = f"{datetime.now().strftime('%d-%m-%Y %H-%M-%S')}.json"
     file_path = os.path.join(FOLDER_PATH, filename)
 
-    # Save the data to a JSON file
     with open(file_path, 'w') as file:
         json.dump(data, file)
 
