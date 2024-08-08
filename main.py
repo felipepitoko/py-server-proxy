@@ -16,6 +16,11 @@ if not os.path.exists(FOLDER_PATH):
 def hello_world():
     return jsonify({'message': 'Testing api v 1.0'}), 200
 
+@app.route('/api/received', methods=['GET'])
+def list_received():
+    lista_recebidos = os.listdir(FOLDER_PATH)
+    return jsonify(lista_recebidos), 200
+
 @app.route('/api/example-data', methods=['GET'])
 def serve_example_data():
     example_data = [
