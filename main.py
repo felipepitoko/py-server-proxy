@@ -19,7 +19,13 @@ def hello_world():
 @app.route('/api/received', methods=['GET'])
 def list_received():
     lista_recebidos = os.listdir(FOLDER_PATH)
-    return jsonify(lista_recebidos), 200
+    #aggregate every str in lista_recebidos by date and count them
+    counts = {}
+    for timestamp in lista_recebidos:
+        date = timestamp.split()[0]
+        counts[date] = counts.get(date, 0) + 1
+
+    return jsonify(counts), 200
 
 @app.route('/api/example-data', methods=['GET'])
 def serve_example_data():
